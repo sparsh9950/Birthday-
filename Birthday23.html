@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Sahiba</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe0ec, #fff4f8);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      text-align: center;
+      padding: 3rem 2rem;
+      user-select: none;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #container {
+      max-width: 750px;
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(233,30,99,0.3);
+      font-size: 1.5rem;
+      line-height: 1.8;
+      transition: opacity 0.8s ease;
+      opacity: 1;
+      min-height: 250px;
+      cursor: pointer;
+    }
+
+    h1 {
+      color: #e91e63;
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+
+    .emojis {
+      font-size: 1.8rem;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #d81b60;
+      text-transform: uppercase;
+    }
+
+    .special {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #c2185b;
+      margin-top: 1.5rem;
+    }
+
+    .confetti {
+      font-size: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      background-color: #e91e63;
+      color: white;
+      padding: 1rem 2rem;
+      margin: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background-color: #c2185b;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Container -->
+  <div id="container"></div>
+
+  <script>
+    const slides = [
+      `<h1>HELLO MADAM JI... ✨</h1>
+       <p>Today is your <span class="emojis">💖🎂 BIRTHDAY 🎂💖</span> so...</p>`,
+
+      `<p>I MADE THIS FOR YOU <span class="emojis">🧁🎁</span></p>`,
+
+      `<h1>HAPPY BIRTHDAY SAHIBA! <span class="emojis">🌸🌟</span></h1>`,
+
+      `<p>You LIGHT UP every moment with your SMILE <span class="emojis">😊✨</span> 
+       and make life so much BRIGHTER <span class="emojis">🌈</span>.</p>`,
+
+      `<p>On your SPECIAL DAY, I wish you all the 
+       <span class="highlight">HAPPINESS</span>, 
+       <span class="highlight">LOVE</span>, and 
+       <span class="highlight">LAUGHTER</span> in the world <span class="emojis">💫💐</span></p>`,
+
+      `<p>You DESERVE nothing but the 
+       <span class="highlight">ABSOLUTE BEST</span>, and I'm so LUCKY to have you 
+       by my side as a <span class="highlight">BEST FRIEND</span> <span class="emojis">❤️👯‍♀️</span></p>`,
+
+      `<p>TODAY I want to tell you something... <span class="emojis">👉👈</span></p>`,
+
+      `<div class="special">That...<br>YOU ARE MY <span class="highlight">SPECIAL</span> <span class="emojis">💗</span> :)</div>`,
+
+      `<h1>HAPPY BIRTHDAY SAHIBA ONCE AGAIN!!! <span class="emojis">❤️💝</span></h1>
+       <div class="confetti">🎉🎊🎉🎊🎉</div>
+       <p style="font-size: 0.9rem; color: #999; margin-top: 2rem;">(Click anywhere to replay)</p>`
+    ];
+
+    let currentSlide = 0;
+    const container = document.getElementById('container');
+    const audio = document.getElementById('bgMusic');
+
+    // Show music option first
+    function showMusicPrompt() {
+      container.innerHTML = `
+        <h1>You want the music ON 🎧🎵</h1>
+        <button class="button" onclick="startMessage(true)">Yes</button>
+        <button class="button" onclick="startMessage(false)">No</button>
+      `;
+    }
+
+    function startMessage(playMusic) {
+      if (playMusic) {
+        audio.play().catch(() => {
+          alert("Tap anywhere to allow music to play.");
+        });
+      }
+      container.onclick = nextSlide;
+      showSlide(currentSlide);
+    }
+
+    function showSlide(index) {
+      container.style.opacity = 0;
+      setTimeout(() => {
+        container.innerHTML = slides[index];
+        container.style.opacity = 1;
+      }, 800);
+    }
+
+    function nextSlide() {
+      currentSlide++;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      showSlide(currentSlide);
+    }
+
+    showMusicPrompt();
+  </script>
+</body>
+</html>
